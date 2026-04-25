@@ -37,15 +37,28 @@ No wiring required - it's all on the board!
 
 ## Configuration
 
-Set environment variables before building:
+**DO NOT commit credentials to git!**
 
-```bash
-export WIFI_SSID="BRIANLAN IoT"
-export WIFI_PASS="surfkauai"
-export MQTT_BROKER="192.168.2.176"
-```
+1. Copy the example environment file:
+   ```bash
+   cp .env.example .env
+   ```
 
-Or edit the fallback values in `src/main.cpp`.
+2. Edit `.env` with your credentials:
+   ```bash
+   WIFI_SSID=your_wifi_ssid
+   WIFI_PASS=your_wifi_password
+   MQTT_BROKER=your_mqtt_broker_ip
+   MQTT_USER=your_mqtt_username
+   MQTT_PASS=your_mqtt_password
+   ```
+
+3. Build and upload with the environment variables:
+   ```bash
+   export $(cat .env | xargs) && pio run --target upload
+   ```
+
+The `.env` file is already in `.gitignore` and will never be committed.
 
 ## Building and Uploading
 
